@@ -5,7 +5,7 @@
    Vanilla JS — state persisted in localStorage
    ========================================================= */
 
-const STORE_KEY = 'gravity-excellence-hub-v1';
+const STORE_KEY = 'gravity-excellence-hub-v2';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
@@ -89,7 +89,7 @@ function defaultState() {
     weekly: [2.5, 3, 1.5, 2, 0, 1.5, 1],
     subjects: [
       {
-        id: 'math', name: 'Mathematics', code: 'MA', teacher: 'Ms. Rhea Kapoor',
+        id: 'math', name: 'Mathematics', code: 'MA', teacher: 'Shahbaz',
         room: 'A-12', colour: '#0f7a43', mastery: 84,
         chapters: [
           { t: 'Real Numbers', done: true },
@@ -101,7 +101,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'physics', name: 'Physics', code: 'PH', teacher: 'Mr. Daniel Okafor',
+        id: 'physics', name: 'Physics', code: 'PH', teacher: 'Shahzeb',
         room: 'B-04', colour: '#16a34a', mastery: 71,
         chapters: [
           { t: 'Motion & Force', done: true },
@@ -113,7 +113,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'chemistry', name: 'Chemistry', code: 'CH', teacher: 'Dr. Nita Rao',
+        id: 'chemistry', name: 'Chemistry', code: 'CH', teacher: 'Arsalan Rehman',
         room: 'B-07', colour: '#f0c000', mastery: 76,
         chapters: [
           { t: 'Matter in Our Surroundings', done: true },
@@ -125,7 +125,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'biology', name: 'Biology', code: 'BI', teacher: 'Ms. Sara Lin',
+        id: 'biology', name: 'Biology', code: 'BI', teacher: 'Arsalan Rehman',
         room: 'C-02', colour: '#0d9488', mastery: 88,
         chapters: [
           { t: 'Cell — The Unit of Life', done: true },
@@ -137,7 +137,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'english', name: 'English', code: 'EN', teacher: 'Mrs. Alina Fernandes',
+        id: 'english', name: 'English', code: 'EN', teacher: 'Adeeba',
         room: 'A-08', colour: '#65a30d', mastery: 79,
         chapters: [
           { t: 'The Fun They Had', done: true },
@@ -149,7 +149,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'cs', name: 'Computer Science', code: 'CS', teacher: 'Mr. Vikram Shah',
+        id: 'cs', name: 'Computer Science', code: 'CS', teacher: 'Zoya',
         room: 'D-01', colour: '#ca8a04', mastery: 92,
         chapters: [
           { t: 'Computer Systems', done: true },
@@ -161,7 +161,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'history', name: 'History', code: 'HI', teacher: 'Ms. Priya Nair',
+        id: 'history', name: 'History', code: 'HI', teacher: 'Abuzar',
         room: 'A-15', colour: '#15803d', mastery: 68,
         chapters: [
           { t: 'The French Revolution', done: true },
@@ -173,7 +173,7 @@ function defaultState() {
         ]
       },
       {
-        id: 'geography', name: 'Geography', code: 'GE', teacher: 'Mr. Arjun Mehta',
+        id: 'geography', name: 'Geography', code: 'GE', teacher: 'Abuzar',
         room: 'A-16', colour: '#4d7c0f', mastery: 74,
         chapters: [
           { t: 'India — Size & Location', done: true },
@@ -182,6 +182,27 @@ function defaultState() {
           { t: 'Climate', done: false },
           { t: 'Natural Vegetation & Wildlife', done: false },
           { t: 'Population', done: false }
+        ]
+      },
+      {
+        id: 'economics', name: 'Economics', code: 'EC', teacher: 'Abuzar',
+        room: 'A-14', colour: '#a16207', mastery: 72,
+        chapters: [
+          { t: 'The Story of Village Palampur', done: true },
+          { t: 'People as Resource', done: true },
+          { t: 'Poverty as a Challenge', done: true },
+          { t: 'Food Security in India', done: false }
+        ]
+      },
+      {
+        id: 'civics', name: 'Civics', code: 'CV', teacher: 'Abuzar',
+        room: 'A-17', colour: '#0f766e', mastery: 66,
+        chapters: [
+          { t: 'What is Democracy? Why Democracy?', done: true },
+          { t: 'Constitutional Design', done: true },
+          { t: 'Electoral Politics', done: true },
+          { t: 'Working of Institutions', done: false },
+          { t: 'Democratic Rights', done: false }
         ]
       }
     ],
@@ -192,11 +213,11 @@ function defaultState() {
       ],
       Tue: [
         { s: 'cs', r: 'D-01' }, { s: 'math', r: 'A-12' }, { s: 'geography', r: 'A-16' },
-        { s: 'history', r: 'A-15' }, { s: 'physics', r: 'B-04' }, { s: 'library', r: 'Library' }
+        { s: 'history', r: 'A-15' }, { s: 'physics', r: 'B-04' }, { s: 'economics', r: 'A-14' }
       ],
       Wed: [
         { s: 'biology', r: 'C-02' }, { s: 'chemistry', r: 'B-07' }, { s: 'math', r: 'A-12' },
-        { s: 'english', r: 'A-08' }, { s: 'cs', r: 'D-01' }, { s: 'selfstudy', r: 'A-12' }
+        { s: 'english', r: 'A-08' }, { s: 'cs', r: 'D-01' }, { s: 'civics', r: 'A-17' }
       ],
       Thu: [
         { s: 'physics', r: 'B-04' }, { s: 'history', r: 'A-15' }, { s: 'geography', r: 'A-16' },
@@ -215,7 +236,9 @@ function defaultState() {
       { id: 'a5', title: 'Acids & bases — revision quiz', subjectId: 'chemistry', due: isoOffset(-1), priority: 'high', submitted: false },
       { id: 'a6', title: 'Book review: The Little Girl', subjectId: 'english', due: isoOffset(6), priority: 'medium', submitted: false },
       { id: 'a7', title: 'Map work: Indian river systems', subjectId: 'geography', due: isoOffset(-2), priority: 'low', submitted: true },
-      { id: 'a8', title: 'Cell diagram — labelled sketch', subjectId: 'biology', due: isoOffset(5), priority: 'medium', submitted: true }
+      { id: 'a8', title: 'Cell diagram — labelled sketch', subjectId: 'biology', due: isoOffset(5), priority: 'medium', submitted: true },
+      { id: 'a9', title: 'Case study: The Story of Village Palampur', subjectId: 'economics', due: isoOffset(3), priority: 'medium', submitted: false },
+      { id: 'a10', title: 'Preamble & fundamental rights chart', subjectId: 'civics', due: isoOffset(5), priority: 'medium', submitted: false }
     ],
     notes: [
       {
@@ -525,6 +548,9 @@ function renderDueSoon(pending) {
 function renderSubjects() {
   const sortMode = $('#subjectSort').value || 'az';
   const subjects = state.subjects.slice();
+
+  const summary = $('#subjectSummary');
+  if (summary) summary.textContent = `Grade 9 · Term 2 · ${state.subjects.length} subjects`;
 
   if (sortMode === 'az') subjects.sort((a, b) => a.name.localeCompare(b.name));
   else if (sortMode === 'progress') subjects.sort((a, b) => chapterStats(a).pct - chapterStats(b).pct);
