@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f7a43">
+<title>Gravity Excellence School · Study Hub</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f7a43'/%3E%3Cellipse cx='32' cy='32' rx='21' ry='9' fill='none' stroke='%23ffd23f' stroke-width='4' transform='rotate(-28 32 32)'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23ffd23f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#" data-view-link="home" aria-label="Gravity Excellence School — home">
+      <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="Gravity Excellence School logo">
+        <defs>
+          <linearGradient id="brandG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#18a558"/>
+            <stop offset="1" stop-color="#064e2b"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="19" fill="url(#brandG)"/>
+        <ellipse cx="32" cy="32" rx="22" ry="9.5" fill="none" stroke="#ffd23f" stroke-width="3" transform="rotate(-28 32 32)"/>
+        <circle cx="32" cy="32" r="11.5" fill="#ffd23f"/>
+        <text x="32" y="37.8" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="#064e2b">G</text>
+        <circle cx="50.5" cy="21" r="3.2" fill="#ffffff"/>
+      </svg>
+      <span class="brand-text">
+        <strong>Gravity Excellence</strong>
+        <small>School · Study Hub</small>
+      </span>
+    </a>
+
+    <nav class="tabs" aria-label="Main navigation">
+      <button class="tab is-active" data-view-link="home">Home</button>
+      <button class="tab" data-view-link="subjects">Subjects</button>
+      <button class="tab" data-view-link="timetable">Timetable</button>
+      <button class="tab" data-view-link="assignments">Tasks</button>
+      <button class="tab" data-view-link="progress">Progress</button>
+      <button class="tab" data-view-link="notes">Notes</button>
+    </nav>
+
+    <div class="top-actions">
+      <div class="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M16.4 16.4 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input id="searchInput" type="search" placeholder="Search school…" autocomplete="off" aria-label="Search subjects and tasks">
+        <div class="search-results" id="searchResults" hidden></div>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle colour theme"></button>
+      <div class="avatar" id="avatar" title="Student profile">AS</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ================= HOME ================= -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" id="todayLabel">—</p>
+        <h1 id="greeting">Good morning, <span class="hl">Aarav</span>.</h1>
+        <p class="lede" id="heroLede">Loading your day…</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" data-view-link="subjects">Continue studying</button>
+          <button class="btn btn-ghost" data-view-link="timetable">Today's timetable</button>
+        </div>
+      </div>
+      <div class="hero-ring">
+        <div class="ring" id="termRing" style="--p:0">
+          <div class="ring-inner">
+            <strong id="termRingValue">0%</strong>
+            <span>term progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="grid-2">
+      <section class="card">
+        <header class="card-head">
+          <h2>Today's classes</h2>
+          <span class="card-sub" id="todaySub">—</span>
+        </header>
+        <ul class="class-list" id="todayClasses"></ul>
+      </section>
+
+      <section class="card">
+        <header class="card-head">
+          <h2>Due soon</h2>
+          <button class="link-btn" data-view-link="assignments">View all</button>
+        </header>
+        <ul class="due-list" id="dueList"></ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <header class="card-head">
+        <h2>Subject focus</h2>
+        <span class="card-sub">Mastery from quizzes &amp; classwork</span>
+      </header>
+      <div class="mastery-grid" id="masteryGrid"></div>
+    </section>
+  </section>
+
+  <!-- ================= SUBJECTS ================= -->
+  <section class="view" id="view-subjects" hidden>
+    <div class="view-head">
+      <div>
+        <p class="eyebrow">Curriculum</p>
+        <h1>Subjects</h1>
+        <p class="lede">Grade 9 · Term 2 · 8 subjects</p>
+      </div>
+      <select id="subjectSort" class="select" aria-label="Sort subjects">
+        <option value="az">Sort: A–Z</option>
+        <option value="progress">Sort: Needs focus</option>
+        <option value="mastery">Sort: Highest mastery</option>
+      </select>
+    </div>
+    <div class="subject-grid" id="subjectGrid"></div>
+  </section>
+
+  <!-- ================= TIMETABLE ================= -->
+  <section class="view" id="view-timetable" hidden>
+    <div class="view-head">
+      <div>
+        <p class="eyebrow">Week at a glance</p>
+        <h1>Timetable</h1>
+        <p class="lede">Six periods a day · Assembly at 07:45 on Mondays</p>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="tt" id="timetable"></table>
+    </div>
+    <p class="legend">
+      <span><i class="dot" style="background:#ffd23f"></i> Today</span>
+      <span><i class="dot" style="background:#16a34a"></i> Current period</span>
+      <span>Break 09:35 – 10:00 · Lunch 11:35 – 12:15</span>
+    </p>
+  </section>
+
+  <!-- ================= ASSIGNMENTS ================= -->
+  <section class="view" id="view-assignments" hidden>
+    <div class="view-head">
+      <div>
+        <p class="eyebrow">Homework &amp; projects</p>
+        <h1>Tasks</h1>
+        <p class="lede" id="taskSummary">—</p>
+      </div>
+    </div>
+    <div class="filters" id="taskFilters" role="group" aria-label="Filter tasks">
+      <button class="chip is-active" data-filter="all">All</button>
+      <button class="chip" data-filter="pending">Pending</button>
+      <button class="chip" data-filter="overdue">Overdue</button>
+      <button class="chip" data-filter="submitted">Submitted</button>
+    </div>
+    <div class="task-list" id="taskList"></div>
+  </section>
+
+  <!-- ================= PROGRESS ================= -->
+  <section class="view" id="view-progress" hidden>
+    <div class="view-head">
+      <div>
+        <p class="eyebrow">This week</p>
+        <h1>Progress</h1>
+        <p class="lede">A quick look at how Term 2 is going.</p>
+      </div>
+    </div>
+
+    <div class="progress-grid">
+      <section class="card">
+        <header class="card-head">
+          <h2>Study time</h2>
+          <span class="card-sub" id="studyTotal">—</span>
+        </header>
+        <div class="chart" id="weekChart"></div>
+      </section>
+
+      <section class="card">
+        <header class="card-head"><h2>Attendance</h2></header>
+        <div class="donut-wrap">
+          <div class="donut" id="attendanceDonut" style="--v:0">
+            <div class="donut-inner">
+              <div>
+                <strong id="attendanceValue">—</strong>
+                <span class="card-sub">this term</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-sub" id="attendanceNote">—</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="grid-2">
+      <section class="card">
+        <header class="card-head"><h2>Term goals</h2></header>
+        <div class="goal-list" id="goalList"></div>
+      </section>
+
+      <section class="card">
+        <header class="card-head">
+          <h2>Study streak</h2>
+          <span class="card-sub" id="streakLabel">—</span>
+        </header>
+        <div class="streak" id="streakGrid" aria-label="Study activity for the last 21 days"></div>
+        <p class="card-sub streak-note">Last 21 days · a filled square means you studied that day</p>
+      </section>
+    </div>
+
+    <section class="card">
+      <header class="card-head">
+        <h2>Subject mastery</h2>
+        <span class="card-sub">Average 0%</span>
+      </header>
+      <div class="mastery-grid" id="masteryGridFull"></div>
+    </section>
+  </section>
+
+  <!-- ================= NOTES ================= -->
+  <section class="view" id="view-notes" hidden>
+    <div class="view-head">
+      <div>
+        <p class="eyebrow">Your notebook</p>
+        <h1>Study notes</h1>
+        <p class="lede">Everything is saved on this device.</p>
+      </div>
+    </div>
+
+    <section class="card">
+      <header class="card-head"><h2>Add a note</h2></header>
+      <form id="noteForm" class="note-form">
+        <label class="field">
+          <span>Title</span>
+          <input id="noteTitle" maxlength="80" placeholder="e.g. Photosynthesis — key points" required>
+        </label>
+        <label class="field">
+          <span>Subject</span>
+          <select id="noteSubject"></select>
+        </label>
+        <label class="field full">
+          <span>Note</span>
+          <textarea id="noteBody" rows="3" placeholder="Write formulas, definitions or reminders…" required></textarea>
+        </label>
+        <div class="full note-actions">
+          <button class="btn btn-primary" type="submit">Save note</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="note-list" id="noteList"></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>© <span id="year">2026</span> Gravity Excellence School · Study Hub</span>
+  <span class="motto">Study with purpose · Rise with gravity</span>
+</footer>
+
+<!-- Subject detail modal -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<noscript><p style="text-align:center;padding:24px">This app needs JavaScript enabled.</p></noscript>
+
+<script src="app.js"></script>
+</body>
+</html>
